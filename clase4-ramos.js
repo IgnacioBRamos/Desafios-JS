@@ -1,6 +1,24 @@
+// Se creo un juego que se basa se en elejir un enemigo, el cual vendra con una vida deteminada. Nosotros tendremos que vencerlo, dependiendo el tipo de ataque que elijamos,nuestro personaje hara mas danio o menos danio, pero existe la posibilidad que este ataque sea esquivado o no.
 
-//numero random
-// let x = Math.ceil(Math.random()*3)
+
+// construccion personajes
+class Peleador{
+    constructor(nombre,vida,armadura){
+        this.nombre = nombre
+        this.vida = vida
+        this.armadura = armadura
+    }
+
+}
+
+
+// creacion de enemigos
+let arquero = new Peleador ("Robin",100,10)
+let guerrero = new Peleador ("Teseo",120,5)
+
+
+let lista_personajes = [arquero,guerrero] // hago una lista con los enemigos creados. Se iran agregando mas
+
 
 
 // Construccion de armadura
@@ -12,16 +30,13 @@ class Armadura{
     }
 }
 
+
+// creacion de armaduras
 let armadura_pesada = new Armadura(15,30,15)
 let armadura_ligera = new Armadura(10,20,10)
 
 
-
-
-
-
-
-
+ 
 
 
 // Eleccion de armadura
@@ -45,24 +60,10 @@ if((armadura_eleccion == "1") || (armadura_eleccion == "2")){
 
 
 
-// construccion personajes
-class Peleador{
-    constructor(nombre,vida,armadura){
-        this.nombre = nombre
-        this.vida = vida
-        this.armadura = armadura
-    }
-
-}
-
-let arquero = new Peleador ("Robin",100,10)
-let guerrero = new Peleador ("Teseo",120,5)
 
 
-let lista_personajes = [arquero,guerrero]
 
-
-//Personaje personalizado
+// Creacion nuestro personaje
 
 let nombre = prompt ("Elija el nombre de su personaje")
 
@@ -80,10 +81,12 @@ let mi_personaje = new Peleador(nombre,mivida)
 
 
 
-vida_total = mivida + armadura_total // esta es la vida total, la suma entre la vida y armadura
 
 
-console.log(vida_total)
+vida_total = mivida + armadura_total // esta es la vida total, la suma entre la vida y armadura dependiedo que tipo de armadura se elija
+
+alert("Su vida base es de: "+mivida+"\nSu poder de proteccion por la armadura es de: "+armadura_total+"\nSu vida total es de: "+vida_total)
+
 
 
 
@@ -91,10 +94,9 @@ console.log(vida_total)
 
 // Funcion
 
-// esta funcion es el danio que se le hace al personaje
+//Funcion con una lista de los posibles danios que se pueden hacer
 function danio_jugador(eleccion){
     let mi_danio = [0,5,10,15]
-    
     if (eleccion == 0){
         golpe = mi_danio[0]
     }else if (eleccion == 1){
@@ -113,17 +115,9 @@ function danio_jugador(eleccion){
 
 
 
-
-
-
-
-
-
-
 //Empieza el juego 
 
 let personaje_a_derrotar = prompt("elije un personaje contra el que pelearas:\n0) arquero \n1) guerrero")
-
 
 
 if (personaje_a_derrotar == "0"){
@@ -136,9 +130,9 @@ if (personaje_a_derrotar == "0"){
     while((vida_restante > 0) && (vida_total>0)){
         
         
-        let intento = parseInt(prompt("Elija un numero del 1 al 3"))
+        let intento = parseInt(prompt("Elija un numero del 1 al 3\n1) 5 de danio\n2) 10 de danio\n3) 15 de danio"))
 
-        let efectivo = Math.ceil(Math.random()*2)
+        let efectivo = Math.ceil(Math.random()*2) // Le agregue esta funcion para que el danio sea o no efectivo. Por ahora es un 50% 50%. Luego dependiendo de la armadura puede que esto cambie
         if (efectivo == 1){
             ataque = danio_jugador(intento)
 
@@ -198,7 +192,7 @@ if (personaje_a_derrotar == "0"){
     while((vida_restante > 0) && (vida_total>0)){
         
         
-        let intento = parseInt(prompt("Elija un numero del 1 al 3"))
+        let intento = parseInt(prompt("Elija un numero del 1 al 3\n1) 5 de danio\n2) 10 de danio\n3) 15 de danio"))
 
         let efectivo = Math.ceil(Math.random()*2)
         if (efectivo == 1){
@@ -249,3 +243,6 @@ if (personaje_a_derrotar == "0"){
     }
 
 }
+
+
+//Fin del juego
