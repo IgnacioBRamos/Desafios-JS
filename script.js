@@ -14,10 +14,11 @@ class Peleador{
 
 // creacion de enemigos
 let arquero = new Peleador ("Robin",100,10)
-let guerrero = new Peleador ("Teseo",120,5)
+let guerrero = new Peleador ("Teseo",140,20)
+let asesino = new Peleador("Ivar",120,15)
 
 
-let lista_personajes = [arquero,guerrero] // hago una lista con los enemigos creados. Se iran agregando mas
+let lista_personajes = [arquero,guerrero,asesino] // hago una lista con los enemigos creados. Se iran agregando mas
 
 
 
@@ -44,17 +45,15 @@ let armadura_eleccion = prompt("Elija su armadura:\n1) Armadura Pesada\n2) Armad
 
 
 
-if((armadura_eleccion == "1") || (armadura_eleccion == "2")){
-    if(armadura_eleccion == "1"){
-        armadura_total = armadura_pesada.casco + armadura_pesada.pecho + armadura_pesada.pantalon
-    }else{
-        armadura_total = armadura_ligera.casco + armadura_ligera.pecho + armadura_ligera.pantalon
+    if((armadura_eleccion == "1") || (armadura_eleccion == "2")){
+        if(armadura_eleccion == "1"){
+            armadura_total = armadura_pesada.casco + armadura_pesada.pecho + armadura_pesada.pantalon
+        }else{
+            armadura_total = armadura_ligera.casco + armadura_ligera.pecho + armadura_ligera.pantalon
+        }
+        console.log(armadura_total)
+        
     }
-    console.log(armadura_total)
-}else{
-    alert("opcion Incorrecta")
-}
-
 
 
 
@@ -117,7 +116,7 @@ function danio_jugador(eleccion){
 
 //Empieza el juego 
 
-let personaje_a_derrotar = prompt("elije un personaje contra el que pelearas:\n0) arquero \n1) guerrero")
+let personaje_a_derrotar = prompt("elije un personaje contra el que pelearas:\n0) arquero \n1) guerrero\n3)Asesino")
 
 
 if (personaje_a_derrotar == "0"){
@@ -181,7 +180,7 @@ if (personaje_a_derrotar == "0"){
     }
 
 
-}else{
+}else if(personaje_a_derrotar == "1"){
     nombre_personaje = lista_personajes[1].nombre
     console.log("Usted a elejido a: "+ nombre_personaje)
 
@@ -242,7 +241,69 @@ if (personaje_a_derrotar == "0"){
         alert("El guerrero ha sido derrotado")
     }
 
+}else{
+    nombre_personaje = lista_personajes[2].nombre
+    console.log("Usted a elejido a: "+ nombre_personaje)
+
+    vida_restante = guerrero.vida
+
+    alert("Empieza atacando usted")
+
+    while((vida_restante > 0) && (vida_total>0)){
+        
+        
+        let intento = parseInt(prompt("Elija un numero del 1 al 3\n1) 5 de danio\n2) 10 de danio\n3) 15 de danio"))
+
+        let efectivo = Math.ceil(Math.random()*2)
+        if (efectivo == 1){
+            ataque = danio_jugador(intento)
+
+            vida_restante = vida_restante - ataque
+            console.log("Usted le ha hecho: "+ataque+" danio\nLa vida restante de "+guerrero.nombre+" es de: "+vida_restante)
+
+        }else{
+            ataque = danio_jugador(0)
+            
+            vida_restante = vida_restante - ataque
+            console.log("El asesino ha esquivado su ataque\nUsted le ha hecho: "+ataque+" danio\nLa vida restante de "+guerrero.nombre+" es de: "+vida_restante)
+        }
+
+
+
+        alert("turno Asesino")
+
+        // intento = prompt("Elija un numero del 0 al 2")
+
+
+        intento = Math.ceil(Math.random()*3)
+
+        efectivo = Math.ceil(Math.random()*2)
+
+        if(efectivo == 1){
+            
+            ataque = danio_jugador(intento)
+            vida_total = vida_total - ataque
+    
+            console.log("Usted ha recibido: "+ataque+" danio\nLa vida restante de "+mi_personaje.nombre+" es de: "+vida_total)
+    
+        }else{
+            ataque = danio_jugador(0)
+            vida_total = vida_total - ataque
+            console.log("Usted ha logrado esquivar el ataque con exito\nUsted ha recibido: "+ataque+" danio\nLa vida restante de "+mi_personaje.nombre+" es de: "+vida_total)
+        }
+
+        alert("Su turno")
+    }
+    
+    if (vida_total <= 0){
+        alert("El Asesino te ha derrotado")
+    }
+    else if(vida_restante<=0){
+        alert("El Asesino ha sido derrotado")
+    }
+
 }
+
 
 
 //Fin del juego
