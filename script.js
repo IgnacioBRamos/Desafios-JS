@@ -78,16 +78,34 @@ let mi_personaje = new Peleador(nombre,mivida)
 
 
 
-
-
-
-
-vida_total = mivida + armadura_total // esta es la vida total, la suma entre la vida y armadura dependiedo que tipo de armadura se elija
+vida_total = mivida + armadura_total // esta es la vida total, la suma entre la vida y armadura dependiendo que tipo de armadura se elija
 
 alert("Su vida base es de: "+mivida+"\nSu poder de proteccion por la armadura es de: "+armadura_total+"\nSu vida total es de: "+vida_total)
 
 
+let estadisticas = [mivida,armadura_total,vida_total]
 
+
+
+
+
+console.dir(document)
+let carta = document.getElementById("estadisticas")
+
+carta.innerHTML = `
+    <h5>Nombre: ${nombre}</h5>
+    <h6>Su vida base: ${estadisticas[0]}</h6>
+    <h6>Su armadura total: ${estadisticas[1]}</h6>
+    <h6>Su vida total: ${estadisticas[2]}</h6>`
+
+
+
+
+let cartaEnemigo = document.getElementById("estadisticas2")
+cartaEnemigo.innerHTML=`
+    <h5>Nombre: ${guerrero.nombre}</h5>
+    <h6>Su vida base: ${guerrero.vida}</h6>
+    <h6>Su armadura: ${guerrero.armadura}</h6>`
 
 
 
@@ -109,6 +127,12 @@ function danio_jugador(eleccion){
 
     return golpe
 }
+
+
+
+
+
+
 
 
 
