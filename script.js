@@ -88,7 +88,7 @@ let estadisticas = [mivida,armadura_total,vida_total]
 
 
 
-
+// carta que muestra nuestro personaje con nuestras estadisticas
 console.dir(document)
 let carta = document.getElementById("estadisticas")
 
@@ -101,11 +101,7 @@ carta.innerHTML = `
 
 
 
-let cartaEnemigo = document.getElementById("estadisticas2")
-cartaEnemigo.innerHTML=`
-    <h5>Nombre: ${guerrero.nombre}</h5>
-    <h6>Su vida base: ${guerrero.vida}</h6>
-    <h6>Su armadura: ${guerrero.armadura}</h6>`
+
 
 
 
@@ -130,9 +126,12 @@ function danio_jugador(eleccion){
 
 
 
+// Carta que muestra el enemigo y sus estadisticas dependiendo de cual elijas
 
-
-
+let contenedor = document.getElementsByTagName("section")[0]
+let cartaEnemigo = document.createElement("div")
+cartaEnemigo.className = "card"
+cartaEnemigo.setAttribute("width", "18rem;");
 
 
 
@@ -140,12 +139,42 @@ function danio_jugador(eleccion){
 
 //Empieza el juego 
 
-let personaje_a_derrotar = prompt("elije un personaje contra el que pelearas:\n0) arquero \n1) guerrero\n3)Asesino")
+let personaje_a_derrotar = prompt("elije un personaje contra el que pelearas:\n0) arquero \n1) guerrero\n2)Asesino")
 
 
 if (personaje_a_derrotar == "0"){
     nombre_personaje = lista_personajes[0].nombre //Esto dice el nombre del personaje
     console.log("Usted a elejido a: "+ nombre_personaje)
+
+
+
+
+    // let cartaEnemigo = document.getElementById("estadisticas2")
+    // cartaEnemigo.innerHTML=`
+    // <h5>Nombre: ${arquero.nombre}</h5>
+    // <h6>Su vida base: ${arquero.vida}</h6>
+    // <h6>Su armadura: ${arquero.armadura}</h6>`
+
+    
+
+    cartaEnemigo.innerHTML = `
+        
+        <img src="arquera.gif" class="card-img-top" alt="...">
+        <div class="card-body" id="estadisticas2">
+            <h5>Nombre: ${arquero.nombre}</h5>
+            <h6>Su vida base: ${arquero.vida}</h6>
+            <h6>Su armadura: ${arquero.armadura}</h6>
+        </div>
+        `
+    contenedor.append(cartaEnemigo)
+
+
+
+
+
+
+
+
 
     vida_restante = arquero.vida
 
@@ -208,6 +237,33 @@ if (personaje_a_derrotar == "0"){
     nombre_personaje = lista_personajes[1].nombre
     console.log("Usted a elejido a: "+ nombre_personaje)
 
+    // let cartaEnemigo = document.getElementById("estadisticas2")
+    // cartaEnemigo.innerHTML=`
+    // <h5>Nombre: ${guerrero.nombre}</h5>
+    // <h6>Su vida base: ${guerrero.vida}</h6>
+    // <h6>Su armadura: ${guerrero.armadura}</h6>`
+
+
+    
+
+    cartaEnemigo.innerHTML = `
+        
+        <img src="peleador3.gif" class="card-img-top" alt="...">
+        <div class="card-body" id="estadisticas2">
+            <h5>Nombre: ${guerrero.nombre}</h5>
+            <h6>Su vida base: ${guerrero.vida}</h6>
+            <h6>Su armadura: ${guerrero.armadura}</h6>
+        </div>
+        `
+    contenedor.append(cartaEnemigo)
+
+
+
+
+
+
+
+
     vida_restante = guerrero.vida
 
     alert("Empieza atacando usted")
@@ -269,7 +325,32 @@ if (personaje_a_derrotar == "0"){
     nombre_personaje = lista_personajes[2].nombre
     console.log("Usted a elejido a: "+ nombre_personaje)
 
-    vida_restante = guerrero.vida
+
+    // let cartaEnemigo = document.getElementById("estadisticas2")
+    // cartaEnemigo.innerHTML=`
+    // <h5>Nombre: ${asesino.nombre}</h5>
+    // <h6>Su vida base: ${asesino.vida}</h6>
+    // <h6>Su armadura: ${asesino.armadura}</h6>`
+
+    
+
+    cartaEnemigo.innerHTML = `
+        
+        <img src="peleador.gif" class="card-img-top" alt="...">
+        <div class="card-body" id="estadisticas2">
+            <h5>Nombre: ${asesino.nombre}</h5>
+            <h6>Su vida base: ${asesino.vida}</h6>
+            <h6>Su armadura: ${asesino.armadura}</h6>
+        </div>
+        `
+    contenedor.append(cartaEnemigo)
+
+
+
+
+
+
+    vida_restante = asesino.vida
 
     alert("Empieza atacando usted")
 
@@ -283,13 +364,13 @@ if (personaje_a_derrotar == "0"){
             ataque = danio_jugador(intento)
 
             vida_restante = vida_restante - ataque
-            console.log("Usted le ha hecho: "+ataque+" danio\nLa vida restante de "+guerrero.nombre+" es de: "+vida_restante)
+            console.log("Usted le ha hecho: "+ataque+" danio\nLa vida restante de "+asesino.nombre+" es de: "+vida_restante)
 
         }else{
             ataque = danio_jugador(0)
             
             vida_restante = vida_restante - ataque
-            console.log("El asesino ha esquivado su ataque\nUsted le ha hecho: "+ataque+" danio\nLa vida restante de "+guerrero.nombre+" es de: "+vida_restante)
+            console.log("El asesino ha esquivado su ataque\nUsted le ha hecho: "+ataque+" danio\nLa vida restante de "+asesino.nombre+" es de: "+vida_restante)
         }
 
 
