@@ -1,26 +1,5 @@
-class Cafes{
-    constructor(id,imagen,nombre,descripcion,precio){
-        this.id = id
-        this.imagen = imagen
-        this.nombre = nombre
-        this.descripcion = descripcion
-        this.precio = precio
-    }
-}
 
-class CapsulaCafe{
-    constructor(id,imagen,nombre,descripcion,precio){
-        this.id = id
-        this.imagen = imagen
-        this.nombre = nombre
-        this.descripcion = descripcion
-        this.precio = precio
-    }
-}
 
-let americano = new CapsulaCafe(4,"multimedia/capsula-americano.jpg","Americano","Cafe rico dulce y tostado",450)
-let cortado = new CapsulaCafe(5,"multimedia/capsula-cortado.jpg","Gortado","Cafe rico dulce y tostado",450)
-let ginseng = new CapsulaCafe(6,"multimedia/capsula-ginseng.jpg","Ginseng","Cafe rico dulce y tostado",450)
 
 
 
@@ -34,26 +13,22 @@ class ElementosCarrito{
 
 
 
-
 // arrays donde vamos a guardar nuetros productoss
 const listaDeProductos = []
 let productosCarrito = []
 
+if(localStorage.getItem("Carrito De Compras")!=null){
+    productosCarrito=JSON.parse(localStorage.getItem("Carrito De Compras"))
+    
+}else{
+    productosCarrito=[]
+}
 
 
 
-let expresso = new Cafes(1,"multimedia/cafemolido-expresso.jpg","Expresso","Cafe rico dulce y tostado",500)
-let houseBlend = new Cafes(2,"multimedia/cafemolido-HouseBlend.jpg","House Blend","Cafe rico dulce y tostado",500)
-let mocha = new Cafes(3,"multimedia/cafemolido-mocha.jpg","Mocha","Cafe rico dulce y tostado",500)
-
-
-
-const tarjetas = document.getElementsByClassName("todo")[0]
-const contenedorCarritoCompras = document.getElementById("items")
-const footerCarrito = document.getElementById("footer")
-
-
-
+const tarjetas = document.getElementsByClassName("todo")[0];
+const contenedorCarritoCompras = document.getElementById("items");
+const footerCarrito = document.getElementById("footer");
 
 
 // Definicion de funciones
@@ -123,29 +98,27 @@ function ProductosEnCarrito(){
 
 
             // recuperacion de datos del carrito
-            // if(localStorage.getItem("Carrito De Compras")!=null){
-            //     productosCarrito=JSON.parse(localStorage.getItem("Carrito De Compras"))
-                
-            // }
-
-
-
-
-
-
-            // const objetoAJson = JSON.stringify(elemento.producto) // pasamos el objeta a formato json
             
-            // localStorage.setItem("Carrito De Compras",objetoAJson)
 
-            // let traidoDelStorage =localStorage.getItem("Carrito De Compras")
-            // const jsonAobjeto = JSON.parse(traidoDelStorage) 
-            // console.log(jsonAobjeto)
+
+
+
+
+
+            const objetoAJson = JSON.stringify(productosCarrito) // pasamos el objeta a formato json
+            localStorage.setItem("Carrito De Compras",objetoAJson)
+
+            
             
         }
 
 
     )
-    
+    let traidoDelStorage =localStorage.getItem("Carrito De Compras")
+    const jsonAobjeto = JSON.parse(traidoDelStorage) 
+    console.log(jsonAobjeto)
+
+
     if(productosCarrito == 0) {
         footerCarrito.innerHTML = `
             <th scope="row" colspan="5">Carrito vacío</th>
@@ -211,7 +184,13 @@ function crearCarta(ProductoDeLaLista){
         
         ProductosEnCarrito()
 
-        alert("agregaste el "+ProductoDeLaLista.nombre+" al carrito")
+        Toastify({
+            text: "Producto: "+ProductoDeLaLista.nombre+" agregado al carrito",
+            duration: 3000,
+            gravity: 'bottom',
+            position: 'left'
+        }).showToast();
+        
     }
     
     

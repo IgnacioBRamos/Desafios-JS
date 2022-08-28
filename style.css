@@ -1,0 +1,36 @@
+body{
+    background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+}
+
+
+.Navegacion{
+   background-color:  rgba(10, 4, 1, 0.518);
+}
+
+
+
+.contenedor_footer{
+    background-color: gray;
+    
+}
+
+
+.contenido-logos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+.logo-cafeteria{
+    margin-bottom: 20px;
+}
+
+.logos-redes{
+    margin: 10px;
+    width:  40px;
+}
+
+.boton_navbar{
+    border: 1px solid white;
+}
