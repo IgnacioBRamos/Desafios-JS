@@ -17,12 +17,10 @@ class ElementosCarrito{
 const listaDeProductos = []
 let productosCarrito = []
 
-if(localStorage.getItem("Carrito De Compras")!=null){
-    productosCarrito=JSON.parse(localStorage.getItem("Carrito De Compras"))
-    
-}else{
-    productosCarrito=[]
-}
+
+// Agregamos un operador ternario
+productosCarrito=JSON.parse(localStorage.getItem("Carrito De Compras"))|| [];
+
 
 
 
@@ -138,6 +136,13 @@ function eliminarElemento(elementoAEliminar){
     productosCarrito.length = 0;
 
     productosQueNoSeBorran.forEach((elemento) => productosCarrito.push(elemento));
+    Toastify({
+        text: "Producto: "+elementoAEliminar.producto.nombre+" eliminado del carrito",
+        duration: 2000,
+        gravity: 'bottom',
+        position: 'left',
+        backgroundColor: "red"
+    }).showToast();
 }
 
 
@@ -186,9 +191,10 @@ function crearCarta(ProductoDeLaLista){
 
         Toastify({
             text: "Producto: "+ProductoDeLaLista.nombre+" agregado al carrito",
-            duration: 3000,
+            duration: 2000,
             gravity: 'bottom',
-            position: 'left'
+            position: 'left',
+            backgroundColor: "green"
         }).showToast();
         
     }
