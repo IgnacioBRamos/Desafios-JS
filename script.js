@@ -1,8 +1,4 @@
 
-
-
-
-
 class ElementosCarrito{
     constructor(producto,cantidad){
         this.producto = producto
@@ -13,17 +9,17 @@ class ElementosCarrito{
 
 
 
-// arrays donde vamos a guardar nuetros productoss
+// creamos dos arrays uno donde guardaremos nuestros productos y otro igual con la diferencia que van a ser mostrados en el carrito de compras
 const listaDeProductos = []
 let productosCarrito = []
 
 
-// Agregamos un operador ternario
+// Agregamos un operador logico or
 productosCarrito=JSON.parse(localStorage.getItem("Carrito De Compras"))|| [];
 
 
 
-
+// Traemos del nuestro html
 const tarjetas = document.getElementsByClassName("todo")[0];
 const contenedorCarritoCompras = document.getElementById("items");
 const footerCarrito = document.getElementById("footer");
@@ -42,13 +38,11 @@ function agregarProductos(){
     
 }
 
-    // con esta funcion agregamos un producto de elemento carrito al array productos carrito
-function agregarACarrito(){
-    
-}
 
 
-    // con esta funcion vamos a mostrar en el HTML el o los productos que esten en el array productosCarrito
+
+
+    // con esta funcion vamos a mostrar en el modal del carrito, el o los productos que esten en el array productosCarrito
 function ProductosEnCarrito(){
     
     let acumuladorPrecios = 0
@@ -117,15 +111,18 @@ function ProductosEnCarrito(){
     console.log(jsonAobjeto)
 
 
-    if(productosCarrito == 0) {
-        footerCarrito.innerHTML = `
-            <th scope="row" colspan="5">Carrito vacío</th>
-        `;
-    } else {
-        footerCarrito.innerHTML = `
-            <th scope="row" colspan="5">Total de la compra: $${acumuladorPrecios}</th>
-        `;
-    }
+    // condicional reducido a un operador ternario que muesta la suma de los precios de los productos y si no hay nada muestra el carrito vacio
+    productosCarrito == 0 ? footerCarrito.innerHTML = `<th scope="row" colspan="5">Carrito vacío</th>` : footerCarrito.innerHTML = `<th scope="row" colspan="5">Total de la compra: $${acumuladorPrecios}</th>`;
+
+    // if(productosCarrito == 0) {
+    //     footerCarrito.innerHTML = `
+    //         <th scope="row" colspan="5">Carrito vacío</th>
+    //     `;
+    // } else {
+    //     footerCarrito.innerHTML = `
+    //         <th scope="row" colspan="5">Total de la compra: $${acumuladorPrecios}</th>
+    //     `;
+    // }
     
 
     
@@ -147,7 +144,7 @@ function eliminarElemento(elementoAEliminar){
 
 
 
-    // con esta funcion vamos a crear nuestras cartas que van a contener los productos
+    // con esta funcion vamos a crear nuestras cartas que van a contener los productos y ademas agregamos un evento en el cual al hacer click lo agregamos al array producto carrito.
 function crearCarta(ProductoDeLaLista){
 
     let boton = document.createElement("button")
@@ -179,12 +176,14 @@ function crearCarta(ProductoDeLaLista){
 
         let existe = productosCarrito.find((elemento)=>elemento.producto.id == ProductoDeLaLista.id)
 
-        if(existe){
-            existe.cantidad+=1
-        }else{
-            let elementoCarrito = new ElementosCarrito(ProductoDeLaLista,1)
-            productosCarrito.push(elementoCarrito)
-        }
+        // operador ternario
+        existe ? existe.cantidad+=1 : productosCarrito.push(new ElementosCarrito(ProductoDeLaLista,1))
+        // if(existe){
+        //     existe.cantidad+=1
+        // }else{
+        //     let elementoCarrito = new ElementosCarrito(ProductoDeLaLista,1)
+        //     productosCarrito.push(elementoCarrito)
+        // }
 
         
         ProductosEnCarrito()
@@ -208,7 +207,7 @@ function crearCarta(ProductoDeLaLista){
 }
 
 
-    // dentro de esta funcion vamos a recorrer cada producto guaradado en el array de listaDeProductos y al ejecutar la funcion crear carta vamos a ir creando una carta por cada producto que hay y se va a ir mostrando en el HTMl
+    // dentro de esta funcion vamos a recorrer cada producto guardado en el array de listaDeProductos y al ejecutar la funcion crearcarta() vamos a ir creando una carta por cada producto que hay y se va a ir mostrando en el HTMl
 function TodosLosProductos(){
     listaDeProductos.forEach(
         (producto)=>{
@@ -218,8 +217,38 @@ function TodosLosProductos(){
     )
 }
 
+// funcion que redirecciona a mercadopago cuando queremos realizar una compra.
+function redireccion(){
 
+    let botonesModal= document.getElementsByClassName("contenedor_botones_modal")[0]
+    botonesModal.innerHTML = `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>`
 
+    let botonRedirigir = document.createElement("button")
+    botonRedirigir.className = ("btn btn-primary")
+    botonRedirigir.innerHTML =`<a href="#" style="color:white; text-decoration: none;" >Finalizar Compra</a>`
+
+    botonRedirigir.addEventListener("click",redirigir)
+
+    let segundos = 5
+    function redirigir(){
+        
+        Swal.fire(
+            'Redireccionando a mercado pago para que complete su compra',
+            segundos +" segundos",
+            'success'
+        )
+        if (segundos == -1){
+            location.href = "https://www.mercadopago.com"
+        }
+        else{
+            segundos--;
+            setTimeout(redirigir,1000)
+        }
+        
+    }
+
+    botonesModal.append(botonRedirigir)
+}
 
 
 
@@ -227,10 +256,26 @@ function TodosLosProductos(){
 
 
 agregarProductos()
-// console.log(listaDeProductos)
-agregarACarrito()
-// console.log(productosCarrito)
 
 ProductosEnCarrito()
 
 TodosLosProductos()
+
+redireccion()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
