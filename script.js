@@ -7,7 +7,7 @@ class ElementosCarrito{
 }
 
 
-
+let dolarVenta
 
 // creamos dos arrays uno donde guardaremos nuestros productos y otro igual con la diferencia que van a ser mostrados en el carrito de compras
 const listaDeProductos = []
@@ -146,7 +146,7 @@ function eliminarElemento(elementoAEliminar){
 
     // con esta funcion vamos a crear nuestras cartas que van a contener los productos y ademas agregamos un evento en el cual al hacer click lo agregamos al array producto carrito.
 function crearCarta(ProductoDeLaLista){
-
+    
     let boton = document.createElement("button")
     boton.className = "btn btn-primary"
     boton.innerText = "Agregar al Carrito"
@@ -157,7 +157,8 @@ function crearCarta(ProductoDeLaLista){
     cuerpoDeCarta.innerHTML=`
         <h5 class="card-title">${ProductoDeLaLista.nombre}</h5>
         <p class="card-text">${ProductoDeLaLista.descripcion}</p>
-        <h4>$${ProductoDeLaLista.precio}</h4>`
+        <h4>$${ProductoDeLaLista.precio}</h4>
+        <h4>$${(ProductoDeLaLista.precio/dolarVenta).toFixed(1)}</h4>`
 
     cuerpoDeCarta.append(boton)    
 
@@ -250,7 +251,13 @@ function redireccion(){
     botonesModal.append(botonRedirigir)
 }
 
-
+async function obtenerValorDolar() {
+    const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
+    const resp=await fetch(URLDOLAR)
+    const data=await resp.json()
+    document.getElementById("fila_prueba").innerHTML+=(`<p>Dolar compra: $ ${data.compra}  Dolar venta: $ ${data.venta}</p>`);
+    dolarVenta = data.venta;
+}
 
 // ejecucion funciones
 
@@ -263,6 +270,7 @@ TodosLosProductos()
 
 redireccion()
 
+obtenerValorDolar()
 
 
 
