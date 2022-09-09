@@ -1,0 +1,44 @@
+[{
+                "id": 1,
+                "imagen": "multimedia/cafemolido-expresso.jpg",
+                "nombre": "Expresso",
+                "descripcion":"Cafe rico dulce y tostado",
+                "precio": 500
+            },
+            {
+                "id": 2,
+                "imagen": "multimedia/cafemolido-HouseBlend.jpg",
+                "nombre": "House Blend",
+                "descripcion":"Cafe rico dulce y tostado",
+                "precio": 500
+            },
+            {
+                "id": 3,
+                "imagen": "multimedia/cafemolido-mocha.jpg",
+                "nombre": "Mocha",
+                "descripcion":"Cafe rico dulce y tostado",
+                "precio": 500
+            },
+            {
+                "id": 4,
+                "imagen": "multimedia/capsula-americano.jpg",
+                "nombre": "Capsula Americano",
+                "descripcion":"Cafe rico dulce y tostado",
+                "precio": 450
+            },
+            {
+                "id": 5,
+                "imagen": "multimedia/capsula-cortado.jpg",
+                "nombre": "Capsula Cortado",
+                "descripcion":"Cafe rico dulce y tostado",
+                "precio": 450
+            },
+            {
+                "id": 6,
+                "imagen": "multimedia/capsula-ginseng.jpg",
+                "nombre": "Capsula Ginseng",
+                "descripcion":"Cafe rico dulce y tostado",
+                "precio": 450
+            }
+
+        ]

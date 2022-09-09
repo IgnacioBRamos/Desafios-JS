@@ -10,9 +10,9 @@ class ElementosCarrito{
 let dolarVenta
 
 // creamos dos arrays uno donde guardaremos nuestros productos y otro igual con la diferencia que van a ser mostrados en el carrito de compras
-const listaDeProductos = []
-let productosCarrito = []
 
+let productosCarrito = []
+let productosJSON = []
 
 // Agregamos un operador logico or
 productosCarrito=JSON.parse(localStorage.getItem("Carrito De Compras"))|| [];
@@ -26,20 +26,6 @@ const footerCarrito = document.getElementById("footer");
 
 
 // Definicion de funciones
-
-    // Con esta funcion agregamos los productos al array lista de productos
-function agregarProductos(){
-    listaDeProductos.push(expresso)
-    listaDeProductos.push(houseBlend) 
-    listaDeProductos.push(mocha)
-    listaDeProductos.push(americano)
-    listaDeProductos.push(cortado)
-    listaDeProductos.push(ginseng)
-    
-}
-
-
-
 
 
     // con esta funcion vamos a mostrar en el modal del carrito, el o los productos que esten en el array productosCarrito
@@ -157,8 +143,8 @@ function crearCarta(ProductoDeLaLista){
     cuerpoDeCarta.innerHTML=`
         <h5 class="card-title">${ProductoDeLaLista.nombre}</h5>
         <p class="card-text">${ProductoDeLaLista.descripcion}</p>
-        <h4>$${ProductoDeLaLista.precio}</h4>
-        <h4>$${(ProductoDeLaLista.precio/dolarVenta).toFixed(1)}</h4>`
+        <h6>Precio ARS$${ProductoDeLaLista.precio}</h6>
+        <h6>Precio US$${(ProductoDeLaLista.precio/dolarVenta).toFixed(1)}</h6>`
 
     cuerpoDeCarta.append(boton)    
 
@@ -210,7 +196,7 @@ function crearCarta(ProductoDeLaLista){
 
     // dentro de esta funcion vamos a recorrer cada producto guardado en el array de listaDeProductos y al ejecutar la funcion crearcarta() vamos a ir creando una carta por cada producto que hay y se va a ir mostrando en el HTMl
 function TodosLosProductos(){
-    listaDeProductos.forEach(
+    productosJSON.forEach(
         (producto)=>{
             let TodasLasCartas = crearCarta(producto)
             tarjetas.append(TodasLasCartas)
@@ -251,18 +237,31 @@ function redireccion(){
     botonesModal.append(botonRedirigir)
 }
 
+
+async function obtenerJSON() {
+    const URLJSON="productos.json"
+    const resp=await fetch(URLJSON)
+    const data= await resp.json()
+    productosJSON = data;
+    TodosLosProductos()
+   
+}
+
+
+
 async function obtenerValorDolar() {
     const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
     const resp=await fetch(URLDOLAR)
     const data=await resp.json()
     document.getElementById("fila_prueba").innerHTML+=(`<p>Dolar compra: $ ${data.compra}  Dolar venta: $ ${data.venta}</p>`);
     dolarVenta = data.venta;
+    obtenerJSON()
 }
 
 // ejecucion funciones
 
 
-agregarProductos()
+
 
 ProductosEnCarrito()
 
