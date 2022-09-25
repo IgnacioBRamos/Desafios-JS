@@ -21,6 +21,8 @@ productosCarrito=JSON.parse(localStorage.getItem("Carrito De Compras"))|| [];
 
 // Traemos del nuestro html
 const tarjetas = document.getElementsByClassName("todo")[0];
+const tarjetasCapsula = document.getElementsByClassName("tarjetasCapsula")[0];
+const tarjetasCafetera = document.getElementsByClassName("tarjetasCafetera")[0];
 const contenedorCarritoCompras = document.getElementById("items");
 const footerCarrito = document.getElementById("footer");
 
@@ -133,64 +135,61 @@ function eliminarElemento(elementoAEliminar){
     // con esta funcion vamos a crear nuestras cartas que van a contener los productos y ademas agregamos un evento en el cual al hacer click lo agregamos al array producto carrito.
 function crearCarta(ProductoDeLaLista){
     
-    let boton = document.createElement("button")
-    boton.className = "btn btn-primary"
-    boton.innerText = "Agregar al Carrito"
-
-
-    let cuerpoDeCarta = document.createElement("div")
-    cuerpoDeCarta.className="card-body text-center"
-    cuerpoDeCarta.innerHTML=`
-        <h5 class="card-title">${ProductoDeLaLista.nombre}</h5>
-        <p class="card-text">${ProductoDeLaLista.descripcion}</p>
-        <h6>Precio ARS$${ProductoDeLaLista.precio}</h6>
-        <h6>Precio US$${(ProductoDeLaLista.precio/dolarVenta).toFixed(1)}</h6>`
-
-    cuerpoDeCarta.append(boton)    
-
-
-    let contenedorCarta = document.createElement("div")
-    contenedorCarta.className= "card align-self-center"
-    contenedorCarta.innerHTML=`
-        <img src="${ProductoDeLaLista.imagen}" class="card-img-top" alt="...">
-    `
-
-    contenedorCarta.append(cuerpoDeCarta)
-
     
-    boton.addEventListener("click",agregar)
-    function agregar(){
 
-        let existe = productosCarrito.find((elemento)=>elemento.producto.id == ProductoDeLaLista.id)
+        let boton = document.createElement("button")
+        boton.className = "btn btn-primary"
+        boton.innerText = "Agregar al Carrito"
 
-        // operador ternario
-        existe ? existe.cantidad+=1 : productosCarrito.push(new ElementosCarrito(ProductoDeLaLista,1))
-        // if(existe){
-        //     existe.cantidad+=1
-        // }else{
-        //     let elementoCarrito = new ElementosCarrito(ProductoDeLaLista,1)
-        //     productosCarrito.push(elementoCarrito)
-        // }
+
+        let cuerpoDeCarta = document.createElement("div")
+        cuerpoDeCarta.className="card-body text-center"
+        cuerpoDeCarta.innerHTML=`
+            <h5 class="card-title">${ProductoDeLaLista.nombre}</h5>
+            <p class="card-text des-cafe">${ProductoDeLaLista.descripcion}</p>
+            <h6 class="precio">Precio ARS$${ProductoDeLaLista.precio}</h6>
+            <h6>Precio US$${(ProductoDeLaLista.precio/dolarVenta).toFixed(1)}</h6>`
+
+        cuerpoDeCarta.append(boton)    
+
+
+        let contenedorCarta = document.createElement("div")
+        contenedorCarta.className= "card align-self-center"
+        contenedorCarta.innerHTML=`
+            <img src="${ProductoDeLaLista.imagen}" class="card-img-top img-cafe" alt="...">
+        `
+
+        contenedorCarta.append(cuerpoDeCarta)
 
         
-        ProductosEnCarrito()
+        boton.addEventListener("click",agregar)
+        function agregar(){
 
-        Toastify({
-            text: "Producto: "+ProductoDeLaLista.nombre+" agregado al carrito",
-            duration: 2000,
-            gravity: 'bottom',
-            position: 'left',
-            backgroundColor: "green"
-        }).showToast();
-        
-    }
+            let existe = productosCarrito.find((elemento)=>elemento.producto.id == ProductoDeLaLista.id)
+
+            // operador ternario
+            existe ? existe.cantidad+=1 : productosCarrito.push(new ElementosCarrito(ProductoDeLaLista,1))
+            // if(existe){
+            //     existe.cantidad+=1
+            // }else{
+            //     let elementoCarrito = new ElementosCarrito(ProductoDeLaLista,1)
+            //     productosCarrito.push(elementoCarrito)
+            // }
+
+            
+            ProductosEnCarrito()
+
+            Toastify({
+                text: "Producto: "+ProductoDeLaLista.nombre+" agregado al carrito",
+                duration: 2000,
+                gravity: 'bottom',
+                position: 'left',
+                backgroundColor: "green"
+            }).showToast();
+            
+        }
+        return contenedorCarta
     
-    
-
-
-
-
-    return contenedorCarta
 }
 
 
@@ -199,7 +198,14 @@ function TodosLosProductos(){
     productosJSON.forEach(
         (producto)=>{
             let TodasLasCartas = crearCarta(producto)
-            tarjetas.append(TodasLasCartas)
+            if(producto.id<4){
+                tarjetas.append(TodasLasCartas)
+            }
+            else if((producto.id > 3)&&(producto.id <= 6)){
+                tarjetasCapsula.append(TodasLasCartas)
+            }else{
+                tarjetasCafetera.append(TodasLasCartas)
+            }
         }
     )
 }

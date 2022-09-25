@@ -39,6 +39,27 @@
                 "nombre": "Capsula Ginseng",
                 "descripcion":"Cafe rico dulce y tostado",
                 "precio": 450
+            },
+            {
+                "id": 7,
+                "imagen": "multimedia/cafetera-oster.jpg",
+                "nombre": "Cafetera Oster",
+                "descripcion":"Cafe rico dulce y tostado",
+                "precio": 49999
+            },
+            {
+                "id": 8,
+                "imagen": "multimedia/cafetera-expresso.jpg",
+                "nombre": "Cafetera expresso",
+                "descripcion":"Cafe rico dulce y tostado",
+                "precio": 55399
+            },
+            {
+                "id": 9,
+                "imagen": "multimedia/cafetera-vapor.jpg",
+                "nombre": "Cafetera vapor",
+                "descripcion":"Cafe rico dulce y tostado",
+                "precio": 45780
             }
 
         ]
