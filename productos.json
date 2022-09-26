@@ -2,63 +2,63 @@
                 "id": 1,
                 "imagen": "multimedia/cafemolido-expresso.jpg",
                 "nombre": "Expresso",
-                "descripcion":"Cafe rico dulce y tostado",
-                "precio": 500
+                "descripcion":"Tiene un sabor audaz y suave con notas dulces y vivaces. Disfruta de nuestro café espresso tostado más ligero en casa.",
+                "precio": 1640
             },
             {
                 "id": 2,
                 "imagen": "multimedia/cafemolido-HouseBlend.jpg",
                 "nombre": "House Blend",
-                "descripcion":"Cafe rico dulce y tostado",
-                "precio": 500
+                "descripcion":"Este café latinoamericano está cargado de sabor, equilibrando los gustos a nueces y cacao, con un toque de dulzura que aporta el tostado.",
+                "precio": 1399
             },
             {
                 "id": 3,
                 "imagen": "multimedia/cafemolido-mocha.jpg",
                 "nombre": "Mocha",
-                "descripcion":"Cafe rico dulce y tostado",
-                "precio": 500
+                "descripcion":"Es un café tostado medio con la riqueza de chocolate adecuada",
+                "precio": 1850
             },
             {
                 "id": 4,
                 "imagen": "multimedia/capsula-americano.jpg",
                 "nombre": "Capsula Americano",
-                "descripcion":"Cafe rico dulce y tostado",
-                "precio": 450
+                "descripcion":"El café más intenso de Gimoka pensado para ser degustado en vaso grande, sin que pierda ni una pizca de sabor y fuerza.",
+                "precio": 1428
             },
             {
                 "id": 5,
                 "imagen": "multimedia/capsula-cortado.jpg",
                 "nombre": "Capsula Cortado",
-                "descripcion":"Cafe rico dulce y tostado",
-                "precio": 450
+                "descripcion":"Este cortado en una de las variedades más lograda, consiguiendo un cuerpo, sabor y aroma excepcional.",
+                "precio": 927
             },
             {
                 "id": 6,
                 "imagen": "multimedia/capsula-ginseng.jpg",
                 "nombre": "Capsula Ginseng",
-                "descripcion":"Cafe rico dulce y tostado",
-                "precio": 450
+                "descripcion":"Irresistible café italiano que combina su sabor profundo, equilibrado y persistente, con un toque de caramelo y ginseng",
+                "precio": 1070
             },
             {
                 "id": 7,
                 "imagen": "multimedia/cafetera-oster.jpg",
                 "nombre": "Cafetera Oster",
-                "descripcion":"Cafe rico dulce y tostado",
-                "precio": 49999
+                "descripcion":"Con solo presionar un botón obtienes un espresso, un cappuccino o un lattte… tres estilos de café para cada gusto o personalidad.",
+                "precio": 77790
             },
             {
                 "id": 8,
                 "imagen": "multimedia/cafetera-expresso.jpg",
                 "nombre": "Cafetera expresso",
-                "descripcion":"Cafe rico dulce y tostado",
+                "descripcion":"La cafetera con molinillo incorporado que hará tu café favorito cada día. Excelente relación calidad-precio.",
                 "precio": 55399
             },
             {
                 "id": 9,
                 "imagen": "multimedia/cafetera-vapor.jpg",
                 "nombre": "Cafetera vapor",
-                "descripcion":"Cafe rico dulce y tostado",
+                "descripcion":"Elabora un producto intenso y sabroso con un sistema de presión a vapor para obtener un espresso apenas similar a los de cafetería.",
                 "precio": 45780
             }
 

@@ -79,38 +79,20 @@ function ProductosEnCarrito(){
 
             // recuperacion de datos del carrito
             
-
-
-
-
-
-
             const objetoAJson = JSON.stringify(productosCarrito) // pasamos el objeta a formato json
             localStorage.setItem("Carrito De Compras",objetoAJson)
 
-            
-            
         }
 
 
     )
-    let traidoDelStorage =localStorage.getItem("Carrito De Compras")
-    const jsonAobjeto = JSON.parse(traidoDelStorage) 
-    console.log(jsonAobjeto)
+    
 
 
     // condicional reducido a un operador ternario que muesta la suma de los precios de los productos y si no hay nada muestra el carrito vacio
     productosCarrito == 0 ? footerCarrito.innerHTML = `<th scope="row" colspan="5">Carrito vacío</th>` : footerCarrito.innerHTML = `<th scope="row" colspan="5">Total de la compra: $${acumuladorPrecios}</th>`;
 
-    // if(productosCarrito == 0) {
-    //     footerCarrito.innerHTML = `
-    //         <th scope="row" colspan="5">Carrito vacío</th>
-    //     `;
-    // } else {
-    //     footerCarrito.innerHTML = `
-    //         <th scope="row" colspan="5">Total de la compra: $${acumuladorPrecios}</th>
-    //     `;
-    // }
+    
     
 
     
@@ -138,23 +120,23 @@ function crearCarta(ProductoDeLaLista){
     
 
         let boton = document.createElement("button")
-        boton.className = "btn btn-primary"
+        boton.className = "btn btn-secondary"
         boton.innerText = "Agregar al Carrito"
 
 
         let cuerpoDeCarta = document.createElement("div")
         cuerpoDeCarta.className="card-body text-center"
         cuerpoDeCarta.innerHTML=`
-            <h5 class="card-title">${ProductoDeLaLista.nombre}</h5>
+            <h5 class="card-title nombres">${ProductoDeLaLista.nombre}</h5>
             <p class="card-text des-cafe">${ProductoDeLaLista.descripcion}</p>
             <h6 class="precio">Precio ARS$${ProductoDeLaLista.precio}</h6>
-            <h6>Precio US$${(ProductoDeLaLista.precio/dolarVenta).toFixed(1)}</h6>`
+            <h6 class="precio">Precio US$${(ProductoDeLaLista.precio/dolarVenta).toFixed(1)}</h6>`
 
         cuerpoDeCarta.append(boton)    
 
 
         let contenedorCarta = document.createElement("div")
-        contenedorCarta.className= "card align-self-center"
+        contenedorCarta.className= "card-shop align-self-center"
         contenedorCarta.innerHTML=`
             <img src="${ProductoDeLaLista.imagen}" class="card-img-top img-cafe" alt="...">
         `
@@ -169,14 +151,7 @@ function crearCarta(ProductoDeLaLista){
 
             // operador ternario
             existe ? existe.cantidad+=1 : productosCarrito.push(new ElementosCarrito(ProductoDeLaLista,1))
-            // if(existe){
-            //     existe.cantidad+=1
-            // }else{
-            //     let elementoCarrito = new ElementosCarrito(ProductoDeLaLista,1)
-            //     productosCarrito.push(elementoCarrito)
-            // }
-
-            
+         
             ProductosEnCarrito()
 
             Toastify({
@@ -254,15 +229,18 @@ async function obtenerJSON() {
 }
 
 
-
+//api del cual obtenemos el valor del dolar
 async function obtenerValorDolar() {
-    const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
+    const URLDOLAR = "https://api.bluelytics.com.ar/v2/latest";
     const resp=await fetch(URLDOLAR)
     const data=await resp.json()
-    document.getElementById("fila_prueba").innerHTML+=(`<p>Dolar compra: $ ${data.compra}  Dolar venta: $ ${data.venta}</p>`);
-    dolarVenta = data.venta;
+    document.getElementById("fila_prueba").innerHTML+=(`<p>Dolar compra: $ ${data.blue.value_buy}  Dolar venta: $ ${data.blue.value_sell}</p>`);
+    dolarVenta = data.blue.value_sell;
     obtenerJSON()
 }
+
+
+
 
 // ejecucion funciones
 

@@ -5,6 +5,8 @@ body{
 
 .Navegacion{
    background-color:  rgba(10, 4, 1, 0.518);
+   position: sticky;
+   top:0%;
 }
 
 
